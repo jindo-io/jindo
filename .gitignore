@@ -22,3 +22,8 @@ intellij/out
 
 ### BSP ###
 .bsp/
+
+### Metals ###
+.metals/
+.bloop/
+project/**/metals.sbt
