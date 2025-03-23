@@ -1,13 +1,30 @@
 # Jindo(珍島)
 
-Bringing git-hooks into JVM world 🐕
+**J**VM **I**ntegrated, **N**o-**D**eps **O**peration
 
 Jindo is a lightweight, JVM-based Git hooks manager that simplifies your development workflow.
 It allows you to run JVM applications as Git hooks without external dependencies.
 
 ## Why Jindo?
 
-While tools like pre-commit and husky are great, they often introduce complexity and additional dependencies to JVM projects. Here's why Jindo is different:
+- We need to run git-hooks in our project with just JVM.
+- Don't rely on pre-commit or husky anymore.
+- Here's a simple, fast, and lightweight 🐕 Jindo.
+
+## Getting Started
+
+### MacOS
+
+```bash
+brew tap jindo-io/jindo
+brew install jindo
+```
+
+### Others
+
+Download the latest release.
+
+## Features
 
 ### 🚀 Zero External Dependencies
 * Only requires JVM 8+
