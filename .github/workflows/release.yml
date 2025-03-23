@@ -34,10 +34,10 @@ jobs:
       - run: sbt graalvm-native-image:packageBin
       - name: Zip artifact for deployment
         if:  ${{ !startsWith(matrix.deploy.os, 'windows') }}
-        run: zip -r ${{ matrix.deploy.name }} target/graalvm-native-image/jindo
+        run: zip -j ${{ matrix.deploy.name }} target/graalvm-native-image/jindo
       - name: Zip artifact for deployment
         if:  ${{ startsWith(matrix.deploy.os, 'windows') }}
-        run: 7z a ${{ matrix.deploy.name }} target/graalvm-native-image/jindo.exe
+        run: 7z a -tzip ${{ matrix.deploy.name }} target/graalvm-native-image/jindo.exe
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
