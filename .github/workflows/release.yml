@@ -1,0 +1,47 @@
+name: Release
+
+on:
+  push:
+    branches: 
+      - main
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build Native Image
+    strategy:
+      fail-fast: true
+      matrix:
+        deploy: [
+          { os: macOS-13, name: jindo-x86_64-apple-darwin.zip },
+          { os: macOS-14, name: jindo-aarch64-apple-darwin.zip },
+          { os: ubuntu-22.04, name: jindo-x86_64-pc-linux.zip },
+          { os: ubuntu-24.04-arm, name: jindo-aarch64-pc-linux.zip },
+          { os: windows-2022, name: jindo-x86_64-pc-win32.zip }
+        ]
+    runs-on: ${{ matrix.deploy.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: graalvm/setup-graalvm@v1
+        with:
+          java-version: '21'
+          distribution: 'graalvm'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          native-image-job-reports: 'true'
+      - uses: sbt/setup-sbt@v1
+      - run: sbt graalvm-native-image:packageBin
+      - name: Zip artifact for deployment
+        if:  ${{ !startsWith(matrix.deploy.os, 'windows') }}
+        run: zip -r ${{ matrix.deploy.name }} target/graalvm-native-image/jindo
+      - name: Zip artifact for deployment
+        if:  ${{ startsWith(matrix.deploy.os, 'windows') }}
+        run: 7z a ${{ matrix.deploy.name }} target/graalvm-native-image/jindo.exe
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ matrix.deploy.name }}
+          draft: true
