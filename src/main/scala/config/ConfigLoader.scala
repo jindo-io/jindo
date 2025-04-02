@@ -4,7 +4,7 @@ import io.circe.yaml.parser
 import java.io.InputStreamReader
 import java.nio.file.{Files, Path}
 
-class ConfigLoader(projectRoot: Path) {
+class ConfigLoader(projectRoot: Path) extends ConfigCodecs {
   def loadConfig(): Config = {
     val configPath = projectRoot.resolve(".jindo.yaml")
     if (!Files.exists(configPath)) {

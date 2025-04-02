@@ -1,4 +1,4 @@
-preCommit:
+pre-commit:
   - id: scalafmt
     dependencies:
       - org.scalameta::scalafmt-cli:latest.release

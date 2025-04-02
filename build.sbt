@@ -16,6 +16,7 @@ lazy val root = (project in file("."))
     libraryDependencies ++= Seq(
       "io.circe" %% "circe-yaml" % "0.14.2",
       "io.circe" %% "circe-generic" % "0.14.2",
+      "io.circe" %% "circe-generic-extras" % "0.14.2",
       "io.get-coursier" %% "coursier" % "2.1.7",
       "com.github.scopt" %% "scopt" % "4.1.0"
     )
