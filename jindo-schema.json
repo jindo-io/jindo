@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "Jindo Configuration Schema",
+  "description": "Configuration schema for Jindo git hooks",
+  "properties": {
+    "pre-commit": {
+      "type": "array",
+      "description": "List of hooks to run on pre-commit",
+      "items": {
+        "type": "object",
+        "oneOf": [
+          {
+            "title": "JVM Hook",
+            "description": "Hook that runs a JVM application",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Optional identifier for the hook"
+              },
+              "args": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "default": [],
+                "description": "Command line arguments to pass to the main class"
+              },
+              "main": {
+                "type": "string",
+                "description": "Main class to execute"
+              },
+              "repositories": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Optional list of Maven repositories"
+              },
+              "dependencies": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "List of Maven dependencies in format group:artifact:version"
+              }
+            },
+            "required": ["main"],
+            "additionalProperties": false
+          },
+          {
+            "title": "System Hook",
+            "description": "Hook that runs a system command",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Optional identifier for the hook"
+              },
+              "args": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "default": [],
+                "description": "Command line arguments to pass to the command"
+              },
+              "command": {
+                "type": "string",
+                "description": "System command to execute"
+              }
+            },
+            "required": ["command"],
+            "additionalProperties": false
+          }
+        ]
+      }
+    }
+  },
+  "additionalProperties": false
+}
