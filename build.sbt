@@ -19,5 +19,8 @@ lazy val root = (project in file("."))
       "io.circe" %% "circe-generic-extras" % "0.14.2",
       "io.get-coursier" %% "coursier" % "2.1.7",
       "com.github.scopt" %% "scopt" % "4.1.0"
+    ),
+    graalVMNativeImageOptions ++= Seq(
+      "--enable-url-protocols=https"
     )
   )

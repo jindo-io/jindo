@@ -3,7 +3,3 @@ pre-commit:
     dependencies:
       - org.scalameta::scalafmt-cli:latest.release
     main: org.scalafmt.cli.Cli
-  - id: scalafix
-    dependencies:
-      - ch.epfl.scala::scalafix-cli:latest.release
-    main: scalafix.cli.Cli
