@@ -1,0 +1,39 @@
+# Comprehensive Jindo configuration example
+# This shows all available features for pre-commit hooks
+
+pre-commit:
+  # Code formatting
+  - id: scalafmt
+    main: org.scalafmt.cli.Cli
+    dependencies:
+      - org.scalameta::scalafmt-cli:3.7.17
+    args: ["--non-interactive", "--respect-project-filters"]
+
+  # Static analysis (example with custom repository)
+  - id: scapegoat
+    main: com.sksamuel.scapegoat.sbt.ScapegoatSbtPlugin
+    dependencies:
+      - com.sksamuel.scapegoat::scapegoat-scala_2.13:1.4.12
+    repositories:
+      - https://repo1.maven.org/maven2/
+    args: ["--config", "scapegoat.conf"]
+
+  # Compilation check
+  - id: compile
+    command: sbt
+    args: ["Test/compile"]
+
+  # Test execution
+  - id: test
+    command: sbt
+    args: ["test"]
+
+  # Custom script
+  - id: license-check
+    command: ./scripts/check-license-headers.sh
+    working-directory: "."
+
+  # Docker build check
+  - id: docker-build
+    command: docker
+    args: ["build", "-t", "temp-build", "."]

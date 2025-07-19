@@ -1,5 +1,10 @@
 pre-commit:
   - id: scalafmt
-    dependencies:
-      - org.scalameta::scalafmt-cli:latest.release
     main: org.scalafmt.cli.Cli
+    dependencies:
+      - org.scalameta:scalafmt-cli_2.13:3.7.17
+    args: ["--non-interactive"]
+  
+  - id: compile-check
+    command: sbt
+    args: ["compile"]

@@ -1,0 +1,15 @@
+# Basic Jindo configuration example
+# This shows the minimal setup for pre-commit hooks
+
+pre-commit:
+  # Scala formatting with scalafmt
+  - id: scalafmt
+    main: org.scalafmt.cli.Cli
+    dependencies:
+      - org.scalameta::scalafmt-cli:3.7.17
+    args: ["--non-interactive"]
+
+  # System command example
+  - id: compile-check
+    command: sbt
+    args: ["compile"]

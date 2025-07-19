@@ -1,0 +1,40 @@
+# Java project Jindo configuration example
+# Optimized for Java projects using Maven/Gradle
+
+pre-commit:
+  # Google Java Format
+  - id: google-java-format
+    main: com.google.googlejavaformat.java.Main
+    dependencies:
+      - com.google.googlejavaformat:google-java-format:1.17.0
+    args: ["--replace"]
+
+  # SpotBugs static analysis
+  - id: spotbugs
+    main: edu.umd.cs.findbugs.LaunchAppropriateUI
+    dependencies:
+      - com.github.spotbugs:spotbugs:4.7.3
+      - com.github.spotbugs:spotbugs-annotations:4.7.3
+    args: ["-textui", "-low", "target/classes"]
+
+  # Checkstyle
+  - id: checkstyle
+    main: com.puppycrawl.tools.checkstyle.Main
+    dependencies:
+      - com.puppycrawl.tools:checkstyle:10.12.1
+    args: ["-c", "checkstyle.xml", "src/main/java"]
+
+  # Maven compile
+  - id: maven-compile
+    command: mvn
+    args: ["clean", "compile"]
+
+  # Run all tests
+  - id: test
+    command: mvn
+    args: ["test"]
+
+  # Package and verify
+  - id: package
+    command: mvn
+    args: ["package", "-DskipTests"]
