@@ -1,7 +1,7 @@
 package jindo
 
 import jindo.application.cli.CliParser
-import jindo.application.command.CommandFactory
+import jindo.application.command.{CommandFactory, CommandType}
 import jindo.domain.error.JindoError
 
 object JindoApp {
@@ -25,7 +25,11 @@ object JindoApp {
       config: jindo.application.cli.CliConfig
   ): Int = {
     val projectRoot = config.directory.getOrElse(java.nio.file.Paths.get("."))
-    val command = CommandFactory.create(config.command, projectRoot)
+    val command = config.command match {
+      case CommandType.Init =>
+        CommandFactory.createInit(projectRoot, config.force)
+      case _ => CommandFactory.create(config.command, projectRoot)
+    }
 
     command.execute() match {
       case Right(message) =>
