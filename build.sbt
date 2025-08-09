@@ -29,7 +29,7 @@ lazy val root = (project in file("."))
       "io.circe" %% "circe-generic" % "0.14.2",
       "io.circe" %% "circe-generic-extras" % "0.14.2",
       "io.get-coursier" %% "coursier" % "2.1.7",
-      "com.github.scopt" %% "scopt" % "4.1.0"
+      "info.picocli" % "picocli" % "4.7.5"
     ),
 
     // Test dependencies
