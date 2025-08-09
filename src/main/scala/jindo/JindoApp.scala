@@ -14,12 +14,7 @@ object JindoApp {
   def run(args: Array[String]): Int = {
     CliParser.parse(args) match {
       case Some(config) =>
-        if (config.help) {
-          CliParser.showHelp()
-          0
-        } else {
-          executeCommand(config)
-        }
+        executeCommand(config)
       case None =>
         // scopt already printed error message
         1
@@ -29,7 +24,8 @@ object JindoApp {
   private def executeCommand(
       config: jindo.application.cli.CliConfig
   ): Int = {
-    val command = CommandFactory.create(config.command, config.projectRoot)
+    val projectRoot = config.directory.getOrElse(java.nio.file.Paths.get("."))
+    val command = CommandFactory.create(config.command, projectRoot)
 
     command.execute() match {
       case Right(message) =>

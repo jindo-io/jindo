@@ -21,8 +21,7 @@ object CommandType {
   case object Validate extends CommandType { val name = "validate" }
   case object ListHooks extends CommandType { val name = "list" }
 
-  val all: scala.collection.immutable.List[CommandType] =
-    scala.collection.immutable.List(Install, Run, Validate, ListHooks)
+  val all: List[CommandType] = List(Install, Run, Validate, ListHooks)
 }
 
 /** Factory for creating commands */

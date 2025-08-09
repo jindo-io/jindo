@@ -20,7 +20,7 @@ class ValidateCommand(projectRoot: Path) extends Command {
   ): Either[JindoError, String] = {
     val issues = scala.collection.mutable.ListBuffer[String]()
 
-    // Check if configuration is empty
+    // Check if the configuration is empty
     if (config.isEmpty) {
       issues += "Configuration is empty - no hooks defined"
     }
