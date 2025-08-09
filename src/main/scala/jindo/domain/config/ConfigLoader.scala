@@ -19,10 +19,7 @@ class ConfigLoader(projectRoot: Path) extends ConfigCodecs {
   }
 
   /** Check if configuration file exists */
-  def configExists(): Boolean = Files.exists(configPath)
-
-  /** Get the configuration file path */
-  def getConfigPath: Path = configPath
+  private def configExists(): Boolean = Files.exists(configPath)
 
   private def validateConfigExists(): Either[JindoError, Unit] = {
     if (configExists()) {
@@ -74,10 +71,4 @@ object ConfigLoader {
 
   /** Create a config loader for the given project root */
   def apply(projectRoot: Path): ConfigLoader = new ConfigLoader(projectRoot)
-
-  /** Load config from the current working directory */
-  def loadFromCurrentDir(): Either[JindoError, JindoConfig] = {
-    val currentDir = java.nio.file.Paths.get(".")
-    new ConfigLoader(currentDir).loadConfig()
-  }
 }

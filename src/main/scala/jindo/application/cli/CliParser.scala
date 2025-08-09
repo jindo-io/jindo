@@ -63,7 +63,7 @@ object CliParser {
     OParser.parse(parser, args, CliConfig())
   }
 
-  def showUsage(): Unit = {
+  private def showUsage(): Unit = {
     println(OParser.usage(parser))
   }
 

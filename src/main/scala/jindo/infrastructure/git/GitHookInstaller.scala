@@ -27,31 +27,6 @@ class GitHookInstaller(projectRoot: Path) {
     } yield ()
   }
 
-  /** Check if a hook is already installed */
-  def isHookInstalled(hookType: GitHookType): Boolean = {
-    val hookFile = getHookPath(hookType)
-    Files.exists(hookFile) && Files.isExecutable(hookFile)
-  }
-
-  /** Remove an installed hook */
-  def removeHook(hookType: GitHookType): Either[JindoError, Unit] = {
-    val hookFile = getHookPath(hookType)
-
-    Try {
-      if (Files.exists(hookFile)) {
-        Files.delete(hookFile)
-      }
-    } match {
-      case Success(_) => Right(())
-      case Failure(exception) =>
-        Left(
-          JindoError.GitHookInstallationError(
-            s"Failed to remove hook: ${exception.getMessage}"
-          )
-        )
-    }
-  }
-
   private def validateGitRepository(): Either[JindoError, Unit] = {
     if (isGitRepository) {
       Right(())

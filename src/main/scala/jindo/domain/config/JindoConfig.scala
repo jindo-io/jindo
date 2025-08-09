@@ -15,10 +15,6 @@ case class JindoConfig(
   /** Check if configuration is empty */
   def isEmpty: Boolean = preCommit.isEmpty
 
-  /** Get all unique dependencies across all hooks */
-  def getAllDependencies: Set[String] = {
-    preCommit.flatMap(_.dependencies.getOrElse(List.empty)).toSet
-  }
 }
 
 sealed trait GitHookType {
@@ -27,11 +23,6 @@ sealed trait GitHookType {
 
 object GitHookType {
   case object PreCommit extends GitHookType { val name = "pre-commit" }
-
-  def fromString(str: String): Option[GitHookType] = str.toLowerCase match {
-    case "pre-commit" => Some(PreCommit)
-    case _            => None
-  }
 
   val all: List[GitHookType] = List(PreCommit)
 }

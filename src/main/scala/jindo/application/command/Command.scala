@@ -21,14 +21,6 @@ object CommandType {
   case object Validate extends CommandType { val name = "validate" }
   case object ListHooks extends CommandType { val name = "list" }
 
-  def fromString(str: String): Option[CommandType] = str.toLowerCase match {
-    case "install"  => Some(Install)
-    case "run"      => Some(Run)
-    case "validate" => Some(Validate)
-    case "list"     => Some(ListHooks)
-    case _          => None
-  }
-
   val all: scala.collection.immutable.List[CommandType] =
     scala.collection.immutable.List(Install, Run, Validate, ListHooks)
 }

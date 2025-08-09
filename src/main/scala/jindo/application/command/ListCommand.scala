@@ -55,14 +55,14 @@ class ListCommand(projectRoot: Path) extends Command {
     hook match {
       case jvmHook: JvmHook =>
         val deps = jvmHook.dependencies.map(_.size).getOrElse(0)
-        val depsText = if (deps > 0) s" (${deps} dependencies)" else ""
-        s"${id}JVM: ${jvmHook.mainClass}${depsText}"
+        val depsText = if (deps > 0) s" ($deps dependencies)" else ""
+        s"${id}JVM: ${jvmHook.mainClass}$depsText"
 
       case systemHook: SystemHook =>
         val argsText =
           if (systemHook.args.nonEmpty) s" ${systemHook.args.mkString(" ")}"
           else ""
-        s"${id}System: ${systemHook.command}${argsText}"
+        s"${id}System: ${systemHook.command}$argsText"
     }
   }
 }

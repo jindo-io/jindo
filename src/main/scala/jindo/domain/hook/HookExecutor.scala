@@ -26,7 +26,7 @@ class HookExecutor(projectRoot: Path) {
   }
 
   /** Execute a single hook */
-  def executeHook(hook: Hook): Either[JindoError, String] = {
+  private def executeHook(hook: Hook): Either[JindoError, String] = {
     hook match {
       case jvmHook: JvmHook       => executeJvmHook(jvmHook)
       case systemHook: SystemHook => executeSystemHook(systemHook)
