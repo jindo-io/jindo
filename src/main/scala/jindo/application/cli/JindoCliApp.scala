@@ -41,8 +41,22 @@ class JindoCliApp extends Callable[Int] {
   var directory: Path = java.nio.file.Paths.get(".")
 
   override def call(): Int = {
-    // Show help when no subcommand is provided
+    // Show ASCII art and help when no subcommand is provided
+    showLogo()
     new CommandLine(this).usage(System.out)
     0
+  }
+
+  private def showLogo(): Unit = {
+    println("""
+      |     ██╗██╗███╗   ██╗██████╗  ██████╗ 
+      |     ██║██║████╗  ██║██╔══██╗██╔═══██╗
+      |     ██║██║██╔██╗ ██║██║  ██║██║   ██║
+      |██   ██║██║██║╚██╗██║██║  ██║██║   ██║
+      |╚█████╔╝██║██║ ╚████║██████╔╝╚██████╔╝
+      | ╚════╝ ╚═╝╚═╝  ╚═══╝╚═════╝  ╚═════╝ 
+      |                                      
+      |🐕 Your loyal Git hooks guardian
+      |""".stripMargin)
   }
 }
