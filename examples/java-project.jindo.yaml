@@ -22,7 +22,7 @@ pre-commit:
     main: com.puppycrawl.tools.checkstyle.Main
     dependencies:
       - com.puppycrawl.tools:checkstyle:10.12.1
-    args: ["-c", "checkstyle.xml", "src/main/java"]
+    args: ["-c", "/google_checks.xml", "."]
 
   # Maven compile
   - id: maven-compile

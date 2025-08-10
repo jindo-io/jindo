@@ -69,7 +69,7 @@ class InitCommand(directory: Path, force: Boolean = false) extends Command {
       |    main: com.puppycrawl.tools.checkstyle.Main
       |    dependencies:
       |      - com.puppycrawl.tools:checkstyle:10.12.1
-      |    args: ["-c", "checkstyle.xml", "src/main/java"]
+      |    args: ["-c", "/google_checks.xml", "."]
       |
       |  # Victory tail wagging! 🎉
       |  - id: jindo-success
